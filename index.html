@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <script defer src="./js/main.js" type="module"></script>
+    <title>Pokédex</title>
+</head>
+<body>
+    <header>
+        <img class="logo-pokemon" src="https://www.freepnglogos.com/uploads/pokemon-logo-png-0.png" alt="">
+    </header>
+
+    <main>
+        <div class="filtros">
+            <div class="input-icon">
+                <img class="imagem" src="https://cdn-icons-png.flaticon.com/512/868/868596.png" alt="">
+                <input placeholder="Pesquisar" class="search" type="search"/>
+            </div>
+            <div class="tipo">
+                <a href="#">TIPOS</a>
+                <ul class="sub-menu" id="sub-menu">
+                    <li class="menu-item"><a href="#">Fogo</a></li>
+                    <li class="menu-item"><a href="#">Agua</a></li>
+                    <li class="menu-item"><a href="#">Terra</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container-pokemon" id="container-pokemon"></div>
+    </main>
+</body>
+</html>
