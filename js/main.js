@@ -28,6 +28,43 @@ const getTipos = async () => {
     return tipos.results
 }
 
+const createTipos = (data) => {
+
+    if (data.name != 'unknown' && data.name != 'shadow') {
+        const item = document.createElement('li')
+        const tipo = document.createElement('a')
+        const img = document.createElement('img')
+    
+        item.classList.add('menu-item')
+        img.src = `../imgs/${data.name}.png`
+
+        img.classList.add('logo-tipo')
+        img.classList.add(`${data.name}`)
+        
+        tipo.href = '#'
+        tipo.textContent = data.name
+    
+        item.appendChild(img)
+        item.appendChild(tipo)
+    
+        console.log(item)
+        return item
+    } else{
+        return ''
+    }
+}
+
+const loadTipos = async () => {
+
+    const dropdownTipos = document.getElementById('sub-menu')
+
+    const data = await getTipos()
+
+    const tipos = data.map(createTipos)
+
+    dropdownTipos.replaceChildren(...tipos)
+}
+
 const createPokemon = (data) => {
 
     const cardPokemon = document.createElement('card-pokemon')
@@ -44,10 +81,10 @@ const loadPokemon = async () => {
 
     const data = await getPokemons()
 
-    const cards = await data.map(createPokemon)
+    const cards = data.map(createPokemon)
 
     containerPokemon.replaceChildren(...cards)
 }
 
 loadPokemon()
-getTipos()
+loadTipos()
