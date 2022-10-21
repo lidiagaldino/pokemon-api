@@ -1,6 +1,7 @@
 'use strict'
 
 import './elementos/card-pokemon.js'
+import './elementos/type-pokemon.js'
 
 const getPokemons = async () => {
     let arrayPokemon = []
@@ -32,22 +33,24 @@ const createTipos = (data) => {
 
     if (data.name != 'unknown' && data.name != 'shadow') {
         const item = document.createElement('li')
+        const tipoImg = document.createElement('type-pokemon')
         const tipo = document.createElement('a')
-        const img = document.createElement('img')
+        //const img = document.createElement('img')
     
         item.classList.add('menu-item')
-        img.src = `../imgs/${data.name}.png`
+        tipoImg.foto = `./imgs/${data.name}.png`
+        //img.src = `./imgs/${data.name}.png`
 
-        img.classList.add('logo-tipo')
-        img.classList.add(`${data.name}`)
+        tipoImg.nome = data.name
+        //img.classList.add('logo-tipo')
+        //img.classList.add(`${data.name}`)
         
         tipo.href = '#'
         tipo.textContent = data.name
-    
-        item.appendChild(img)
+        
+        item.appendChild(tipoImg)
         item.appendChild(tipo)
     
-        console.log(item)
         return item
     } else{
         return ''
@@ -71,6 +74,14 @@ const createPokemon = (data) => {
 
     cardPokemon.nome = data.name.toUpperCase()
     cardPokemon.foto = data.sprites.other.dream_world.front_default
+
+    cardPokemon.type = `./imgs/${data.types[0].type.name}.png`
+    cardPokemon.typename = data.types[0].type.name
+    console.log(data.types[0].type.name)
+
+    if (data.types.lenght == 2) {
+        cardPokemon.tipo2 = `./imgs/${data.types[1].type.name }.png`
+    }
 
     return cardPokemon
 }

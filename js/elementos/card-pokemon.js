@@ -1,12 +1,16 @@
+import './type-pokemon.js'
+
 class cardPokemon extends HTMLElement{
 
     constructor(){
         super()
         this.shadow = this.attachShadow({mode: 'open'})
+        this.type2 = 'https://www.ufrgs.br/nieped/wp-content/uploads/2018/08/imagem-branca-grande.png'
+        this.type2name = ''
     }
 
     static get observedAttributes() {
-        return ['nome', 'foto']
+        return ['nome', 'foto', 'type', 'type2', 'typename', 'type2name']
     }
 
     attributeChangedCallback(nameAttr, oldValue, newValue) {
@@ -26,7 +30,9 @@ class cardPokemon extends HTMLElement{
             <img class="poke-photo" src="${this.foto}" alt=""/>
             <div class="container-infos">
                 <h2 class="poke-nome">${this.nome}</h2>
-                <div class="poke-tipos"></div>
+                <div class="poke-tipos">
+                    <type-pokemon foto="${this.type}" nome="${this.typename}"></type-pokemon>
+                </div>
             </div>
         `
 
@@ -50,6 +56,16 @@ class cardPokemon extends HTMLElement{
                 width: 100px;
                 height: 107px;
             }
+            .tipo{
+                height: 28px;
+                width: 28px;
+                padding: 5px;
+                border-radius: 50%;
+            }
+            .grass{
+                background: #5fbd58;
+                box-shadow: 0 0 20px #5fbd58;
+              }
         `
 
         return style
