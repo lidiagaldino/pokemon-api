@@ -25,7 +25,6 @@ class cardPokemon extends HTMLElement{
     component(){
         const card = document.createElement('div')
         card.classList.add('card')
-        console.log(this.type2)
         
         card.innerHTML = `
             <div class="poke-tipos">

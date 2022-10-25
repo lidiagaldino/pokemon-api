@@ -18,6 +18,21 @@ const getPokemons = async () => {
     return arrayPokemon
 }
 
+const pokemons = await getPokemons()
+
+const getPokemonByName = (pokemon) =>{
+
+    const search = []
+
+    pokemons.forEach(item => {
+        if (item.name.includes(pokemon)) {
+            search.push({name: item.name, sprites: {other: {dream_world: {front_default: item.sprites.other.dream_world.front_default}}}, types: item.types})
+        }
+    })
+
+    return search
+}
+
 const getTipos = async () => {
 
     const url = 'https://pokeapi.co/api/v2/type'
@@ -25,7 +40,6 @@ const getTipos = async () => {
     const respose = await fetch(url)
     const tipos = await respose.json()
 
-    console.log(tipos.results)
     return tipos.results
 }
 
@@ -35,15 +49,11 @@ const createTipos = (data) => {
         const item = document.createElement('li')
         const tipoImg = document.createElement('type-pokemon')
         const tipo = document.createElement('a')
-        //const img = document.createElement('img')
     
         item.classList.add('menu-item')
         tipoImg.foto = `./imgs/${data.name}.png`
-        //img.src = `./imgs/${data.name}.png`
 
         tipoImg.nome = data.name
-        //img.classList.add('logo-tipo')
-        //img.classList.add(`${data.name}`)
         
         tipo.href = '#'
         tipo.textContent = data.name
@@ -79,7 +89,6 @@ const createPokemon = (data) => {
     cardPokemon.typename = data.types[0].type.name
 
     if (data.types.length > 1) {
-        console.log('oi')
         cardPokemon.type2 = `./imgs/${data.types[1].type.name }.png`
         cardPokemon.type2name = data.types[1].type.name
     }
@@ -100,3 +109,14 @@ const loadPokemon = async () => {
 
 loadPokemon()
 loadTipos()
+
+const input = document.getElementById('search')
+
+input.addEventListener('keydown', () => {
+    const poke = getPokemonByName(input.value)
+    const containerPokemon = document.getElementById('container-pokemon')
+    
+    const cards = poke.map(createPokemon)
+
+    containerPokemon.replaceChildren(...cards)
+})
