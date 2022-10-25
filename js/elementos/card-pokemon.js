@@ -6,7 +6,7 @@ class cardPokemon extends HTMLElement{
         super()
         this.shadow = this.attachShadow({mode: 'open'})
         this.type2 = 'https://www.ufrgs.br/nieped/wp-content/uploads/2018/08/imagem-branca-grande.png'
-        this.type2name = ''
+        this.type2name = 'none'
     }
 
     static get observedAttributes() {
@@ -25,14 +25,16 @@ class cardPokemon extends HTMLElement{
     component(){
         const card = document.createElement('div')
         card.classList.add('card')
+        console.log(this.type2)
         
         card.innerHTML = `
+            <div class="poke-tipos">
+                <type-pokemon foto="${this.type}" nome="${this.typename}"></type-pokemon>
+                <type-pokemon foto="${this.type2}" nome="${this.type2name}"></type-pokemon>
+            </div>
             <img class="poke-photo" src="${this.foto}" alt=""/>
             <div class="container-infos">
                 <h2 class="poke-nome">${this.nome}</h2>
-                <div class="poke-tipos">
-                    <type-pokemon foto="${this.type}" nome="${this.typename}"></type-pokemon>
-                </div>
             </div>
         `
 
@@ -51,21 +53,19 @@ class cardPokemon extends HTMLElement{
                 align-items: center;
                 justify-content: center;
                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.31);
+                padding: 10px;
             }
             .poke-photo{
                 width: 100px;
                 height: 107px;
             }
-            .tipo{
-                height: 28px;
-                width: 28px;
-                padding: 5px;
-                border-radius: 50%;
+            .poke-tipos{
+                display: flex;
+                gap: 5px;
+                width: 100%;
+                justify-content: end;
             }
-            .grass{
-                background: #5fbd58;
-                box-shadow: 0 0 20px #5fbd58;
-              }
+            
         `
 
         return style

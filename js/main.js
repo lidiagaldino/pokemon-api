@@ -77,10 +77,11 @@ const createPokemon = (data) => {
 
     cardPokemon.type = `./imgs/${data.types[0].type.name}.png`
     cardPokemon.typename = data.types[0].type.name
-    console.log(data.types[0].type.name)
 
-    if (data.types.lenght == 2) {
-        cardPokemon.tipo2 = `./imgs/${data.types[1].type.name }.png`
+    if (data.types.length > 1) {
+        console.log('oi')
+        cardPokemon.type2 = `./imgs/${data.types[1].type.name }.png`
+        cardPokemon.type2name = data.types[1].type.name
     }
 
     return cardPokemon

@@ -124,6 +124,10 @@ class typePokemon extends HTMLElement{
                 background: #fba54c;
                 box-shadow: 0 0 20px #fba54c;
               }
+
+             .none{
+                display: none;
+             }
         `
 
         return style
