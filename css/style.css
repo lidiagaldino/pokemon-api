@@ -2,18 +2,6 @@ body{
     width: 100vw;
 }
 
-header{
-    height: 120px;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-}
-
-.logo-pokemon{
-    height: 180%;
-}
-
 main{
     display: flex;
     flex-direction: column;
@@ -80,6 +68,8 @@ main{
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+   font-family: 'Courier New', Courier, monospace;
+   
   }
 
   .menu-item{

@@ -18,14 +18,14 @@ const getPokemons = async () => {
     return arrayPokemon
 }
 
-const pokemons = await getPokemons()
+var pokemons = await getPokemons()
+var tipoInicial = 'none'
 
 const getPokemonByName = (pokemon) =>{
 
     const search = []
-
     pokemons.forEach(item => {
-        if (item.name.includes(pokemon)) {
+        if (item.name.includes(pokemon.pokemon.name)) {
             search.push({name: item.name, sprites: {other: {dream_world: {front_default: item.sprites.other.dream_world.front_default}}}, types: item.types})
         }
     })
@@ -81,7 +81,6 @@ const loadTipos = async () => {
 const createPokemon = (data) => {
 
     const cardPokemon = document.createElement('card-pokemon')
-
     cardPokemon.nome = data.name.toUpperCase()
     cardPokemon.foto = data.sprites.other.dream_world.front_default
 
@@ -107,15 +106,51 @@ const loadPokemon = async () => {
     containerPokemon.replaceChildren(...cards)
 }
 
+const getPokemonByType = async (type) => {
+
+    if (type == 'none') {
+        return pokemons
+    } else{
+        const url = `https://pokeapi.co/api/v2/type/${type}`
+        const response = await fetch(url)
+        const result = await response.json()
+
+        return result.pokemon
+    }
+}
+
 loadPokemon()
 loadTipos()
 
-const input = document.getElementById('search')
+const getInfo = async (name) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${name.pokemon.name}`
 
-input.addEventListener('keydown', () => {
-    const poke = getPokemonByName(input.value)
+    const reponse = await fetch (url)
+    const result = await reponse.json()
+
+    return result
+}
+
+const input = document.getElementById('search')
+const tipoContainer = document.getElementById('sub-menu')
+
+tipoContainer.addEventListener('click', async (event) => {
+
     const containerPokemon = document.getElementById('container-pokemon')
-    
+
+    const poke = await getPokemonByType(event.target.textContent)
+    const completo = poke.map(getInfo)
+    const resposta = await Promise.all(completo)
+    const cards = resposta.map(createPokemon)
+
+    containerPokemon.replaceChildren(...cards)
+})
+
+input.addEventListener('keydown', async () => {
+
+    const nome = {pokemon: {name: input.value}}
+    const poke = getPokemonByName(nome)
+    const containerPokemon = document.getElementById('container-pokemon')
     const cards = poke.map(createPokemon)
 
     containerPokemon.replaceChildren(...cards)
