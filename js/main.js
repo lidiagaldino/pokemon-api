@@ -2,24 +2,9 @@
 
 import './elementos/card-pokemon.js'
 import './elementos/type-pokemon.js'
+import { getAllPokemons, getInfo, getPokemonByType, getTipos } from './consumo.js'
 
 let contFinal = 50
-
-const getAllPokemons = async () => {
-    let arrayPokemon = []
-    
-    for (let id = 1; id < 650; id++) {
-        const url = `https://pokeapi.co/api/v2/pokemon/${id}`
-        
-        const response = await fetch(url)
-        const pokemon = await response.json()
-
-        arrayPokemon.push(pokemon)
-    }
-
-
-    return arrayPokemon
-}
 
 var pokemons = await getAllPokemons()
 
@@ -33,16 +18,6 @@ const getPokemonByName = (pokemon) =>{
     })
 
     return search
-}
-
-const getTipos = async () => {
-
-    const url = 'https://pokeapi.co/api/v2/type'
-
-    const respose = await fetch(url)
-    const tipos = await respose.json()
-
-    return tipos.results
 }
 
 const createTipos = (data) => {
@@ -113,30 +88,8 @@ const loadPokemon = async () => {
     containerPokemon.replaceChildren(...cards)
 }
 
-const getPokemonByType = async (type) => {
-
-    if (type == 'none') {
-        return pokemons
-    } else{
-        const url = `https://pokeapi.co/api/v2/type/${type}`
-        const response = await fetch(url)
-        const result = await response.json()
-
-        return result.pokemon
-    }
-}
-
 loadPokemon()
 loadTipos()
-
-const getInfo = async (name) => {
-    const url = `https://pokeapi.co/api/v2/pokemon/${name.pokemon.name}`
-
-    const reponse = await fetch (url)
-    const result = await reponse.json()
-
-    return result
-}
 
 const input = document.getElementById('search')
 const tipoContainer = document.getElementById('sub-menu')
