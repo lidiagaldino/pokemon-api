@@ -3,9 +3,11 @@
 import './elementos/card-pokemon.js'
 import './elementos/type-pokemon.js'
 
-const getPokemons = async () => {
-    let arrayPokemon = []
+let contFinal = 50
 
+const getAllPokemons = async () => {
+    let arrayPokemon = []
+    
     for (let id = 1; id < 650; id++) {
         const url = `https://pokeapi.co/api/v2/pokemon/${id}`
         
@@ -15,11 +17,11 @@ const getPokemons = async () => {
         arrayPokemon.push(pokemon)
     }
 
+
     return arrayPokemon
 }
 
-var pokemons = await getPokemons()
-var tipoInicial = 'none'
+var pokemons = await getAllPokemons()
 
 const getPokemonByName = (pokemon) =>{
 
@@ -81,27 +83,32 @@ const loadTipos = async () => {
 const createPokemon = (data) => {
 
     const cardPokemon = document.createElement('card-pokemon')
+    const a = document.createElement('a')
     cardPokemon.nome = data.name.toUpperCase()
     cardPokemon.foto = data.sprites.other.dream_world.front_default
 
     cardPokemon.type = `./imgs/${data.types[0].type.name}.png`
     cardPokemon.typename = data.types[0].type.name
 
+    cardPokemon.classList.add(data.name)
+
     if (data.types.length > 1) {
         cardPokemon.type2 = `./imgs/${data.types[1].type.name }.png`
         cardPokemon.type2name = data.types[1].type.name
     }
 
-    return cardPokemon
+    a.appendChild(cardPokemon)
+    a.href = './pages/pokeinfo.html'
+    return a
 }
 
 const loadPokemon = async () => {
 
     const containerPokemon = document.getElementById('container-pokemon')
 
-    const data = await getPokemons()
+    const teste = pokemons.slice(1, contFinal)
 
-    const cards = data.map(createPokemon)
+    const cards = teste.map(createPokemon)
 
     containerPokemon.replaceChildren(...cards)
 }
@@ -133,10 +140,12 @@ const getInfo = async (name) => {
 
 const input = document.getElementById('search')
 const tipoContainer = document.getElementById('sub-menu')
+const botao = document.getElementById('botao')
 
 tipoContainer.addEventListener('click', async (event) => {
 
     const containerPokemon = document.getElementById('container-pokemon')
+    botao.innerHTML = '<a class="limpar" href="#header">LIMPAR FILTRO</a>'
 
     const poke = await getPokemonByType(event.target.textContent)
     const completo = poke.map(getInfo)
@@ -154,4 +163,17 @@ input.addEventListener('keydown', async () => {
     const cards = poke.map(createPokemon)
 
     containerPokemon.replaceChildren(...cards)
+})
+
+botao.addEventListener('click', () => {
+    contFinal += 50
+    botao.innerHTML = 'VER MAIS'
+
+    loadPokemon()
+})
+
+const main = document.querySelector('main')
+
+main.addEventListener('click', (event) => {
+    localStorage.setItem('pokemon', event.target.classList.value)
 })

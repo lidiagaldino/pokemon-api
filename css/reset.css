@@ -9,6 +9,10 @@ a{
     color: black;
 }
 
+.limpar{
+    color: white;
+}
+
 ul, li{
     list-style: none;
 }

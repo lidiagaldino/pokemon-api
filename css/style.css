@@ -5,6 +5,7 @@ body{
 main{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 38px;
     margin: 50px;
     height: auto;
@@ -16,6 +17,7 @@ main{
     align-items: center;
     padding-right: 10%;
     padding-left: 10%;
+    width: 100%;
 }
 
 .search{
@@ -81,3 +83,19 @@ main{
     gap: 10px;
   }
 
+  .botao{
+    width: auto;
+    padding: 20px;
+    background-color: red;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+  }
+
+  .botao:hover{
+    cursor: pointer;
+  }
+
+  
