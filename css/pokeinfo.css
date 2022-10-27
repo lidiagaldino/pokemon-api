@@ -65,3 +65,20 @@ h1{
     height: 100%;
     width: 50%;
 }
+
+.tittle-status{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status{
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #48bea9;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
