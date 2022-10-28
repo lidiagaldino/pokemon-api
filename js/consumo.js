@@ -1,5 +1,9 @@
 const getAllPokemons = async () => {
     let arrayPokemon = []
+
+    const containerPokemon = document.getElementById('container-pokemon')
+
+    containerPokemon.innerHTML = 'LOADING..'
     
     for (let id = 1; id < 650; id++) {
         const url = `https://pokeapi.co/api/v2/pokemon/${id}`
