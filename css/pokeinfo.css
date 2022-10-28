@@ -1,3 +1,7 @@
+:root{
+    --height: 0%;
+}
+
 body{
     width: 100vw;
     
@@ -44,8 +48,9 @@ h1{
 .container-bar{
     gap: 40px;
     display: flex;
-    flex-direction: column;
+    /*flex-direction: column;*/
     width: 20%;
+    height: 50%;
 }
 
 .progress-bar{
@@ -81,4 +86,53 @@ h1{
     border-radius: 10px;
     color: white;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.titulo{
+    text-transform: capitalize;
+}
+
+.container-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.desempenho{
+    height: 100%;
+    background: #EEEFF8;
+    width: 20px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.desempenho-bar{
+    border-radius: 4px 4px 0px 0px;
+    width: 100%;
+    animation: load 1.5s;
+    background-color: #6FBFB0;
+}
+
+.bar{
+    display: flex;
+    flex-direction: column;
+}
+
+.porcentagem{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.125rem;
+    line-height: 27px;
+}
+
+@keyframes load{
+    0%{
+        height: 0%;
+    }
+    100%{
+        height: var(--height);
+    }
 }
