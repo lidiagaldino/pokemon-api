@@ -10,6 +10,7 @@ const createAbilities = (data) => {
     const abilities = document.createElement('li')
 
     abilities.textContent = data.ability.name
+    abilities.classList.add('habilidade-one')
 
     return abilities
 }
@@ -45,6 +46,8 @@ const loadInfo = async () => {
     habilidadesTitulo.textContent = 'Habilidades'
     habilities.appendChild(habilidadesTitulo)
     habilities.appendChild(habilidadesContainer)
+    habilities.classList.add('container-habilidade')
+    habilidadesContainer.classList.add('habilidades')
 
     const height = document.createElement('li')
     height.textContent = `Height ${data.height}`
@@ -73,7 +76,7 @@ const loadImg = async () => {
     imgPoke.src = data.sprites.other.dream_world.front_default
 }
 
-const createStatus = async (data) => {
+const createStatus = async (dado) => {
 
     const div = document.createElement('div')
     const bar = document.createElement('div')
@@ -85,18 +88,21 @@ const createStatus = async (data) => {
     bar.classList.add('desempenho')
     desempenhoBar.classList.add('desempenho-bar')
     porcentagem.classList.add('porcentagem')
+    desempenhoBar.classList.add(data.types[0].type.name)
+    nome.classList.add('nome-habilidade')
 
-    porcentagem.textContent = data.base_stat
-    desempenhoBar.style.height = data.base_stat + '%'
-    desempenhoBar.style.setProperty('--height', data.base_stat + '%')
-    nome.textContent = data.stat.name
+    porcentagem.textContent = dado.base_stat
+    desempenhoBar.style.width = dado.base_stat + '%'
+    desempenhoBar.style.setProperty('--width', dado.base_stat + '%')
+    nome.textContent = dado.stat.name
 
 
     bar.appendChild(desempenhoBar)
     
-    div.appendChild(porcentagem)
-    div.appendChild(bar)
     div.appendChild(nome)
+    div.appendChild(bar)
+    div.appendChild(porcentagem)
+
 
     return div
 }
