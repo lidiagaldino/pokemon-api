@@ -49,6 +49,10 @@ const loadInfo = async () => {
     habilities.classList.add('container-habilidade')
     habilidadesContainer.classList.add('habilidades')
 
+    habilidades.forEach(element => {
+        element.classList.add(data.types[0].type.name)
+    });
+
     const height = document.createElement('li')
     height.textContent = `Height ${data.height}`
 
@@ -121,3 +125,6 @@ console.log(data.stats[0].stat.name)
 loadInfo()
 loadImg()
 loadStatus()
+
+
+  
